@@ -27,6 +27,7 @@ class ProductManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
     public void testNothingFound() {
         ProductRepository repo = new ProductRepository();
@@ -48,5 +49,64 @@ class ProductManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void testProductsFound() {
+        ProductRepository repo = new ProductRepository();
+        ProductManager ProductManager = new ProductManager(repo);
 
+        Book book1 = new Book(1, "Венецианский купец", 100, "Шекспир");
+        Book book2 = new Book(2, "Бойцовский клуб", 300, "Паланик");
+        Book book3 = new Book(3, "Щегол", 600, "Тарт");
+        Smartphone phone1 = new Smartphone(4, "Samsung", 300_000, "Samsung");
+
+        ProductManager.add(book1);
+        ProductManager.add(book2);
+        ProductManager.add(book3);
+        ProductManager.add(phone1);
+
+        Product[] actual = ProductManager.searchBy("Samsung");
+        Product[] expected = {phone1};
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+    @Test
+    public void testAllProductsFound() {
+        ProductRepository repo = new ProductRepository();
+        ProductManager ProductManager = new ProductManager(repo);
+
+        Book book1 = new Book(1, "Венецианский купец", 100, "Шекспир");
+        Book book2 = new Book(2, "Бойцовский клуб", 300, "Паланик");
+        Book book3 = new Book(3, "Щегол", 600, "Тарт");
+        Smartphone phone1 = new Smartphone(4, "Samsung", 300_000, "Samsung");
+
+        ProductManager.add(book1);
+        ProductManager.add(book2);
+        ProductManager.add(book3);
+        ProductManager.add(phone1);
+
+        Product[] actual = repo.findAll();
+        Product[] expected = {book1, book2,book3,phone1};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void findByFewSymbols(){
+        ProductRepository repo = new ProductRepository();
+        ProductManager ProductManager = new ProductManager(repo);
+
+        Book book1 = new Book(1, "Венецианский купец", 100, "Шекспир");
+        Book book2 = new Book(2, "Бойцовский клуб", 300, "Паланик");
+        Book book3 = new Book(3, "Щегол", 600, "Тарт");
+        Smartphone phone1 = new Smartphone(4, "Samsung", 300_000, "Samsung");
+
+        ProductManager.add(book1);
+        ProductManager.add(book2);
+        ProductManager.add(book3);
+        ProductManager.add(phone1);
+
+        Product[] actual = ProductManager.searchBy("к");
+        Product[] expected = {book1, book2};
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
