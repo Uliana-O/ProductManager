@@ -70,6 +70,7 @@ class ProductManagerTest {
         Assertions.assertArrayEquals(expected, actual);
 
     }
+
     @Test
     public void testAllProductsFound() {
         ProductRepository repo = new ProductRepository();
@@ -86,12 +87,13 @@ class ProductManagerTest {
         ProductManager.add(phone1);
 
         Product[] actual = repo.findAll();
-        Product[] expected = {book1, book2,book3,phone1};
+        Product[] expected = {book1, book2, book3, phone1};
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
-    public void findByFewSymbols(){
+    public void findByOneSymbols() {
         ProductRepository repo = new ProductRepository();
         ProductManager ProductManager = new ProductManager(repo);
 
@@ -109,4 +111,5 @@ class ProductManagerTest {
         Product[] expected = {book1, book2};
         Assertions.assertArrayEquals(expected, actual);
     }
+
 }
