@@ -18,10 +18,6 @@ public class Product {
 
 
 
-    public int getPrice() {
-        return price;
-    }
-
 
     public Product(int id, String name, int price) {
         this.id = id;
